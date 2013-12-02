@@ -4,8 +4,11 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-autopublish
-insecure
 preserve-inputs
 bootstrap
 force-ssl
+accounts-password
+jquery
+audit-argument-checks
+random
+email

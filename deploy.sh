@@ -6,7 +6,7 @@ password=$(head -n 1 password.txt)
 
 expect -f - <<EOD
 set timeout 360
-spawn meteor deploy NoMorePasswordsJustEmail.meteor.com
+spawn meteor deploy NoMorePasswordsJustEmail.meteor.com --settings settings.json
 expect "Password:"
 send "$password\r"
 expect "Deploying to nomorepasswordsjustemail.meteor.com.  Bundling..."

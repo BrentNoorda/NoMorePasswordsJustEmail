@@ -6,7 +6,7 @@
 <body>
   <div class="container">
 
-    <div class="navbar" style="margin-bottom:0;">
+    <div class="navbar">
       <div class="navbar-inner">
 
           <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -33,8 +33,19 @@
       <div class="row">
 
         <div class="span9">
+          {{#if currentUser}}
+            {{> loggedin}}
+          {{else}}
+            {{#if session "email"}}
+              {{> enter_login_code}}
+            {{else}}
+              {{> enter_email}}
+            {{/if}}
+          {{/if}}
 
-          <p>Stuff will go here</p>
+          {{> about}}
+
+          {{> statements}}
 
         </div>
 
@@ -45,7 +56,7 @@
         </div>
       </div>
 
-      <div class="row visible-phone" style="margin-left:-20px;margin-right:-20px;">{{style makes up for 20 pixels added to body}}
+      <div class="row visible-phone" style="margin-left:-20px;margin-right:-20px;">{{! style makes up for 20 pixels added to body }}
         <div class="span10" style="text-align:center;">
           <center>
             {{> adsBottom}}
@@ -58,20 +69,76 @@
   </div>
 </body>
 
+
+<!-- if not logged in, show this menu -->
+  <template name="enter_email">
+    <form id="enter-email-form" class="form-horizontal" role="form">
+      <p>What is the email address for your account?</p>
+      <div class="form-group">
+        <!-- <label class="sr-only" for="enter-email">Email address</label> -->
+        <input type="email" class="form-control" id="enter-email" placeholder="Email to login or register">
+        <button type="submit" class="btn btn-primary">Send login code</button>
+      </div>
+    </form>
+  </template>
+
+<!-- if we have the email address, but not yet the login code -->
+  <template name="enter_login_code">
+    <form id="enter-login-code-form" class="form-horizontal" role="form">
+      <div class="form-group">
+        {{#if session "known"}}
+          <p>To log in, enter the code emailed to <strong>{{session "email"}}</strong>.</p>
+        {{else}}
+          <p>To create an account, enter the code emailed to <strong>{{session "email"}}</strong>.</p>
+        {{/if}}
+        <!-- <label class="sr-only" for="enter-login-code">Code</label> -->
+        <input type="text" class="form-control" id="enter-login-code" placeholder="Code sent in Email">
+        <button type="submit" class="btn btn-primary">
+          {{#if session "known"}}
+            Login
+          {{else}}
+            Register
+          {{/if}}
+        </button>
+        <button id="reset-email" type="button" class="btn btn-danger pull-right">
+          Reset Email
+        </button>
+      </div>
+    </form>
+  </template>
+
+<!-- if logged in, show recent stuff -->
+  <template name="loggedin">
+    <p>Logged in as <strong>{{email}}</strong> &nbsp; &nbsp; <button id="logout-btn" type="button" class="btn btn-danger pull-right">
+          Logout
+        </button></p>
+  </template>
+
+<!-- show people's status who have looked at this page -->
+  <template name="statements">
+    <hr/>
+    <p>put recent statements here</p>
+  </template>
+
+<!-- about this project -->
+  <template name="about">
+    <hr/>
+    <p>about information goes here</p>
+  </template>
+
+<!-- google ads stuff -->
 <!-- http://stackoverflow.com/questions/14389766/meteor-js-use-external-script -->
-
-<template name="adsRight">
+  <template name="adsRight">
     <div id="adsRight">
-        <iframe src="/adright.html?v={{{unique}}}" seamless width="160" height="600" scrolling="no"
-         frameborder="0" marginheight="0" marginwidth="0"
-         style="margin:0;padding:0;border:none;width:160px;height:600px"></iframe>
+      <iframe src="/adright.html?v={{{unique}}}" seamless width="160" height="600" scrolling="no"
+       frameborder="0" marginheight="0" marginwidth="0"
+       style="margin:0;padding:0;border:none;width:160px;height:600px"></iframe>
     </div>
-</template>
-
-<template name="adsBottom">
+  </template>
+  <template name="adsBottom">
     <div id="adsBottom">
-        <iframe src="/adbottom.html?v={{{unique}}}" seamless width="336" height="280" scrolling="no"
-         frameborder="0" marginheight="0" marginwidth="0"
-         style="margin:0;padding:0;border:none;width:336px;height:280px"></iframe>
+      <iframe src="/adbottom.html?v={{{unique}}}" seamless width="336" height="280" scrolling="no"
+       frameborder="0" marginheight="0" marginwidth="0"
+       style="margin:0;padding:0;border:none;width:336px;height:280px"></iframe>
     </div>
-</template>
+  </template>
