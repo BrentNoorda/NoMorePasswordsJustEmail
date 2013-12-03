@@ -1,0 +1,14 @@
+<!-- show people's status who have looked at this page -->
+  <template name="comments">
+    <h4>Comments:</h4>
+    {{#if currentUser}}
+      <input type="text" class="span9 input-small" id="add-comment"
+       placeholder="Enter any comment you wish to share...">
+    {{/if}}
+    {{#each comments}}
+      <div class="comment">
+        <div class="comment-email">{{email}}</div>
+        <div class="comment-text">{{text}}</div>
+      </div>
+    {{/each}}
+  </template>

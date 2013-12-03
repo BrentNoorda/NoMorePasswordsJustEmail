@@ -15,17 +15,17 @@ Meteor.methods({
         // make the code be LOGIN_CODE_LENGTH digits, not start with a 0, and not have any repeating digits
         var random_code = "";
         for ( ; random_code.length < LOGIN_CODE_LENGTH; ) {
-            var char = Random.choice("0123456789");
+            var chr = Random.choice("0123456789");
             if ( random_code.length === 0 ) {
-                if ( (char === "0") ) {
+                if ( (chr === "0") ) {
                     continue;
                 }
             } else {
-                if ( char === random_code.charAt(random_code.length-1) ) {
+                if ( chr === random_code.charAt(random_code.length-1) ) {
                     continue;
                 }
             }
-            random_code += char;
+            random_code += chr;
         }
         console.log(email + " random code = " + random_code);
 

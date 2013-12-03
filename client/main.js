@@ -70,13 +70,3 @@ Template.loggedin.events({
         Session.set("email",null);
     }
 });
-
-Template.about.events({
-    'click h4 a': function(e,tmpl) {
-        if ( $('#what-is-it p').is(':visible') ) {
-            $('#what-is-it p').hide('slow');
-        } else {
-            $('#what-is-it p').show('slow');
-        }
-    }
-});
