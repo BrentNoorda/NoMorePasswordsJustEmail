@@ -1,20 +1,13 @@
 <head>
-  <title>NoMorePasswordsJustEmail</title>
+  <title>NoMorePasswordsJustEmail, because passwords suckity suck suck suck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
   <div class="container">
 
-    <div class="navbar" style="margin-bottom:0;">
+    <div class="navbar">
       <div class="navbar-inner">
-
-          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-          <!--<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>-->
 
           <!-- Be sure to leave the brand out there if you want it shown -->
           <a class="brand" href="/">NoMorePasswordsJustEmail<span class="visible-phone" style="line-height:25%;font-size:80%;"><br/>
@@ -33,8 +26,19 @@
       <div class="row">
 
         <div class="span9">
+          {{#if currentUser}}
+            {{> loggedin}}
+          {{else}}
+            {{#if session "email"}}
+              {{> enter_security_code}}
+            {{else}}
+              {{> enter_email}}
+            {{/if}}
+          {{/if}}
 
-          <p>Stuff will go here</p>
+          {{> about}}
+
+          {{> comments}}
 
         </div>
 
@@ -45,7 +49,7 @@
         </div>
       </div>
 
-      <div class="row visible-phone" style="margin-left:-20px;margin-right:-20px;">{{style makes up for 20 pixels added to body}}
+      <div class="row visible-phone" style="margin-left:-20px;margin-right:-20px;">{{! style makes up for 20 pixels added to body }}
         <div class="span10" style="text-align:center;">
           <center>
             {{> adsBottom}}
@@ -58,20 +62,36 @@
   </div>
 </body>
 
-<!-- http://stackoverflow.com/questions/14389766/meteor-js-use-external-script -->
+<!-- if not logged in, show this menu -->
+  <template name="enter_email">
+    <form id="enter-email-form" class="form-inline" role="form">
+      <label>User ID:</label>
+      <input type="email" class="span4 input-small" id="enter-email" placeholder="Email address is your User ID">
+      <button type="submit" class="btn btn-primary">Get security code</button>
+    </form>
+  </template>
 
-<template name="adsRight">
-    <div id="adsRight">
-        <iframe src="/adright.html?v={{{unique}}}" seamless width="160" height="600" scrolling="no"
-         frameborder="0" marginheight="0" marginwidth="0"
-         style="margin:0;padding:0;border:none;width:160px;height:600px"></iframe>
-    </div>
-</template>
+<!-- if we have the email address, but not yet the security code -->
+  <template name="enter_security_code">
+    <form id="enter-security-code-form" class="form-inline" role="form">
+        <label>Security code:</label>
+        <input type="text" class="span4 input-small" id="enter-security-code" placeholder="see {{session "email"}}">
+        <button type="submit" class="btn btn-primary">
+          {{#if session "known"}}
+            Login
+          {{else}}
+            Register
+          {{/if}}
+        </button>
+        <button id="reset-email" type="button" class="btn btn-danger pull-right">
+          Reset Email
+        </button>
+    </form>
+  </template>
 
-<template name="adsBottom">
-    <div id="adsBottom">
-        <iframe src="/adbottom.html?v={{{unique}}}" seamless width="336" height="280" scrolling="no"
-         frameborder="0" marginheight="0" marginwidth="0"
-         style="margin:0;padding:0;border:none;width:336px;height:280px"></iframe>
-    </div>
-</template>
+<!-- if logged in, show recent stuff -->
+  <template name="loggedin">
+    <p>User ID: <strong>{{email}}</strong> &nbsp; &nbsp;
+       <button id="logout-btn" type="button" class="btn btn-mini btn-danger">Logout</button>
+    </p>
+  </template>
