@@ -30,20 +30,20 @@ Template.enter_email.rendered = function() {
     $('#enter-email').focus();
 };
 
-Template.enter_login_code.events({
+Template.enter_security_code.events({
     'click #reset-email': function (e, tmpl) {
         Meteor.call("cancel_login_code",Session.get("email"));
         Session.set("email",null);
     },
-    'submit #enter-login-code-form': function (e, tmpl) {
+    'submit #enter-security-code-form': function (e, tmpl) {
         // Don't postback
         e.preventDefault();
 
-        var code = $('#enter-login-code').val().trim();
+        var code = $('#enter-security-code').val().trim();
         if ( code.length === 0 ) {
-            $('#enter-login-code').focus();
+            $('#enter-security-code').focus();
         } else {
-            Meteor.call("enter_login_code",Session.get("email"),code,function(error,pwd){
+            Meteor.call("enter_security_code",Session.get("email"),code,function(error,pwd){
                 if ( error ) {
                     alert("That code is invalid, or has timed out. Sorry. Please try again.");
                     Meteor.call("cancel_login_code",Session.get("email"));
@@ -56,8 +56,8 @@ Template.enter_login_code.events({
     }
 });
 
-Template.enter_login_code.rendered = function() {
-    $('#enter-login-code').focus();
+Template.enter_security_code.rendered = function() {
+    $('#enter-security-code').focus();
 };
 
 Template.loggedin.email = function() {
@@ -67,5 +67,16 @@ Template.loggedin.email = function() {
 Template.loggedin.events({
     'click #logout-btn': function (e, tmpl) {
         Meteor.logout();
+        Session.set("email",null);
+    }
+});
+
+Template.about.events({
+    'click h4 a': function(e,tmpl) {
+        if ( $('#what-is-it p').is(':visible') ) {
+            $('#what-is-it p').hide('slow');
+        } else {
+            $('#what-is-it p').show('slow');
+        }
     }
 });

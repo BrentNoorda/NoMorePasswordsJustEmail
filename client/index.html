@@ -1,5 +1,5 @@
 <head>
-  <title>NoMorePasswordsJustEmail</title>
+  <title>NoMorePasswordsJustEmail, because passwords suckity suck suck suck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -37,7 +37,7 @@
             {{> loggedin}}
           {{else}}
             {{#if session "email"}}
-              {{> enter_login_code}}
+              {{> enter_security_code}}
             {{else}}
               {{> enter_email}}
             {{/if}}
@@ -72,27 +72,22 @@
 
 <!-- if not logged in, show this menu -->
   <template name="enter_email">
-    <form id="enter-email-form" class="form-horizontal" role="form">
-      <p>What is the email address for your account?</p>
-      <div class="form-group">
-        <!-- <label class="sr-only" for="enter-email">Email address</label> -->
-        <input type="email" class="form-control" id="enter-email" placeholder="Email to login or register">
-        <button type="submit" class="btn btn-primary">Send login code</button>
-      </div>
+    <form id="enter-email-form" class="form-inline" role="form">
+      <label>User ID:</label>
+      <input type="email" class="span4 input-small" id="enter-email" placeholder="Email address is your User ID">
+      <button type="submit" class="btn btn-primary">Get security code</button>
     </form>
   </template>
 
-<!-- if we have the email address, but not yet the login code -->
-  <template name="enter_login_code">
-    <form id="enter-login-code-form" class="form-horizontal" role="form">
-      <div class="form-group">
+<!-- if we have the email address, but not yet the security code -->
+  <template name="enter_security_code">
+    <form id="enter-security-code-form" class="form-inline" role="form">
         {{#if session "known"}}
-          <p>To log in, enter the code emailed to <strong>{{session "email"}}</strong>.</p>
+          <label>Security code:</label>
         {{else}}
-          <p>To create an account, enter the code emailed to <strong>{{session "email"}}</strong>.</p>
+          <label>Security code:</label>
         {{/if}}
-        <!-- <label class="sr-only" for="enter-login-code">Code</label> -->
-        <input type="text" class="form-control" id="enter-login-code" placeholder="Code sent in Email">
+        <input type="text" class="span4 input-small" id="enter-security-code" placeholder="see {{session "email"}}">
         <button type="submit" class="btn btn-primary">
           {{#if session "known"}}
             Login
@@ -103,27 +98,38 @@
         <button id="reset-email" type="button" class="btn btn-danger pull-right">
           Reset Email
         </button>
-      </div>
     </form>
   </template>
 
 <!-- if logged in, show recent stuff -->
   <template name="loggedin">
-    <p>Logged in as <strong>{{email}}</strong> &nbsp; &nbsp; <button id="logout-btn" type="button" class="btn btn-danger pull-right">
-          Logout
-        </button></p>
+    <p>User ID: <strong>{{email}}</strong> &nbsp; &nbsp;
+       <button id="logout-btn" type="button" class="btn btn-mini btn-danger">Logout</button>
+    </p>
   </template>
 
 <!-- show people's status who have looked at this page -->
   <template name="statements">
-    <hr/>
     <p>put recent statements here</p>
   </template>
 
 <!-- about this project -->
   <template name="about">
-    <hr/>
-    <p>about information goes here</p>
+    <div class="well well-small" id="what-is-it">
+      <h4><a href="#">What is NoMorePasswordsJustEmail?</a></h4>
+      <p>Passwords are annoying. They're hard to create and hard to remember. When we forget them (as
+         we all do) we have reset codes sent to our email addresses, which we assume is secure.
+         So, if we ultimately rely on the "security" of email anyway, why not just do away with
+         passwords altogether and just use email?</p>
+      <p>This site is a proof of concept of the no-password, idea. In this case, you login or
+         register with your email address, then enter a time-limited random security code that
+         is sent to that email address. The browser will remember that you're logged in for a long
+         while, so you won't need to go through this process very often.</p>
+      <p>Not much else about this site is interesting. It's just enough to test whether this
+         passwordless approach is workable. For more a lot more discussion about his and other
+         no-password schemes, see the <a href="https://github.com/BrentNoorda/NoMorePasswordsJustEmail" target="_blank">NoMorePasswordsJustEmail
+         project on GitHub</a>.
+    </div>
   </template>
 
 <!-- google ads stuff -->
@@ -137,6 +143,7 @@
   </template>
   <template name="adsBottom">
     <div id="adsBottom">
+      <hr/>
       <iframe src="/adbottom.html?v={{{unique}}}" seamless width="336" height="280" scrolling="no"
        frameborder="0" marginheight="0" marginwidth="0"
        style="margin:0;padding:0;border:none;width:336px;height:280px"></iframe>

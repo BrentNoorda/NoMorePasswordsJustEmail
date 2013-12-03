@@ -38,11 +38,12 @@ Meteor.methods({
             from: "brent.noorda@gmail.com",
             to: email,
             subject: "NoMorePasswordsJustEmail " + codeType + " code",
-            text: "Your <b><i>NoMorePasswordsJustEmail</i></b> " + codeType + " code is:\r\n\r\n      " + random_code + "\r\n\r\n",
+            text: ( "Your NoMorePasswordsJustEmail " + codeType + " code is:\r\n\r\n      " + random_code + "\r\n\r\n" +
+                    "note: this code is only valid for " + LOGIN_CODE_TIMEOUT_MINUTES + " minutes." ),
             html: ( "<html><body>" +
-                    '<p>Your NoMorePasswordsJustEmail ' + codeType + ' code is<br><br><b><font size="+1">' +
-                    random_code +
-                    '</font></b><br>' +
+                    '<p>Your <b><i>NoMorePasswordsJustEmail</i></b> ' + codeType + ' code is:</p>' +
+                    '<p><font size="+1"><b>' + random_code + '</b></font></p>' +
+                    '<p><font size="-1">note: this code is only valid for ' + LOGIN_CODE_TIMEOUT_MINUTES + ' minutes.</font></p>' +
                     '</body></html>' )
         });
 
@@ -50,10 +51,10 @@ Meteor.methods({
         return ret;
     },
 
-    enter_login_code: function (email,code) {
+    enter_security_code: function (email,code) {
         check(email,String);
         check(code,String);
-        console.log("enter_login_code for email address: " + email + " - code: " + code)
+        console.log("enter_security_code for email address: " + email + " - code: " + code)
         email = email.toLowerCase();
 
         // delete any login codes that have timed out yet
