@@ -125,7 +125,8 @@ server-side code to manage accounts and sending emails
 [7](https://news.ycombinator.com/item?id=4308190)
 [8](https://github.com/relekang/django-nopassword)
 (_if I'd known so many people have already talked about this, I might not have bothered, so I'm glad I didn't know_)
+* [Mozilla Persona](https://login.persona.org/) - Tool any site can use to login with just email (skipping the security code step) [video](https://www.youtube.com/watch?v=nJff23UdNAI)
 * [Handshake.js](http://sendgrid.com/blog/lets-deprecate-password-email-authentication/) - Similar recent POC to do away with passwords, as javascript and a service.
-* [Mozilla Persona](https://login.persona.org/) - Tool any site can use to login with just email (skipping the security code step)
+* [NoPassword](http://nopassword.alexsmolen.com/) - Similar to NMPJE, as some Ruby code.
 * [NoMorePasswordsJustEmail.meteor.com](https://NoMorePasswordsJustEmail.meteor.com/) - this Proof of Concept
 * [Brent Noorda Brick Wall](http://www.brent-noorda.com/) - the author's homepage
