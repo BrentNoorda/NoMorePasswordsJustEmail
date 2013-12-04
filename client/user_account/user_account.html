@@ -1,0 +1,47 @@
+<!-- related to user account/registration/login -->
+
+<template name="user_account">
+  {{#if currentUser}}
+    {{> loggedin}}
+  {{else}}
+    {{#if session "email"}}
+      {{> enter_security_code}}
+    {{else}}
+      {{> enter_email}}
+    {{/if}}
+  {{/if}}
+</template>
+
+<!-- if not logged in, show this menu -->
+  <template name="enter_email">
+    <form id="enter-email-form" class="form-inline" role="form">
+      <label>User ID:</label>
+      <input type="email" class="span4 input-small" id="enter-email" placeholder="Email address is your User ID">
+      <button type="submit" class="btn btn-primary">Get security code</button>
+    </form>
+  </template>
+
+<!-- if we have the email address, but not yet the security code -->
+  <template name="enter_security_code">
+    <form id="enter-security-code-form" class="form-inline" role="form">
+        <label>Security code:</label>
+        <input type="text" class="span4 input-small" id="enter-security-code" placeholder="see {{session "email"}}">
+        <button type="submit" class="btn btn-primary">
+          {{#if session "known"}}
+            Login
+          {{else}}
+            Register
+          {{/if}}
+        </button>
+        <button id="reset-email" type="button" class="btn btn-danger pull-right">
+          Reset Email
+        </button>
+    </form>
+  </template>
+
+<!-- if logged in, show recent stuff -->
+  <template name="loggedin">
+    <p>User ID: <strong>{{email}}</strong> &nbsp; &nbsp;
+       <button id="logout-btn" type="button" class="btn btn-mini btn-danger">Logout</button>
+    </p>
+  </template>

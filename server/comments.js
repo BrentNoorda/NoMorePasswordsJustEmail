@@ -27,6 +27,7 @@ Meteor.methods({
     },
 
     delete_comment: function(id) {
+        check(id,String);
         comments.remove({ _id:id, email:Meteor.user().emails[0].address });
     }
 
