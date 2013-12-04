@@ -114,7 +114,6 @@ server-side code to manage accounts and sending emails
 <a name="links"></a>
 ## Related links:
 
-* [Discussion of this project on Hacker News](https://news.ycombinator.com/item?id=6847720)
 * Many discussions of the issue - [1](http://security.stackexchange.com/questions/12828/if-i-include-a-forgot-password-service-then-whats-the-point-of-using-a-passwor)
 [2](http://security.stackexchange.com/questions/4009/how-to-implement-non-password-authentication-in-a-web-site)
 [3](https://medium.com/p/d6509aa3c60b)
