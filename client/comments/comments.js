@@ -24,6 +24,18 @@ Template.comments.comments = function () {
     return comments.find({}, {sort: {when:-1} } );
 };
 
+Template.comments.my_address = function(email) {
+    try {
+        return Meteor.user().emails[0].address === email;
+    } catch(e) {
+        return false;
+    }
+}
+
 Meteor.startup(function () {
     Meteor.subscribe("comments");
 });
+
+delete_comment = function(id) {
+    Meteor.call("delete_comment",id);
+}

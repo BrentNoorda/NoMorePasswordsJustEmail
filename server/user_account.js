@@ -1,3 +1,5 @@
+// javascript server code for managing user registration/login/logout
+
 var loginCodes = new Meteor.Collection("logincodes");
 
 Meteor.methods({

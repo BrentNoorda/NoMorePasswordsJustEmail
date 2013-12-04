@@ -24,6 +24,11 @@ Meteor.methods({
 
         comments.insert({text:comment,email:email,when:when});
         return 0;
+    },
+
+    delete_comment: function(id) {
+        check(id,String);
+        comments.remove({ _id:id, email:Meteor.user().emails[0].address });
     }
 
 });

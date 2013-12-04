@@ -8,7 +8,12 @@
     {{#each comments}}
       <div class="comment">
         <div class="comment-email">{{email}}</div>
-        <div class="comment-text">{{text}}</div>
+        <div class="comment-text">
+          {{text}}
+          {{#if my_address email}}
+            <a href="#" onclick="delete_comment('{{_id}}')" class="comment-delete">X</a>
+          {{/if}}
+        </div>
       </div>
     {{/each}}
   </template>

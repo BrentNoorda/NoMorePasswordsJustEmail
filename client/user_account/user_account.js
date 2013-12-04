@@ -1,4 +1,4 @@
-// templates for logging in (from email, to generated code)
+// javascript client code for managing user registration/login/logout
 
 Handlebars.registerHelper('session', function(name) {
     return Session.get(name);
