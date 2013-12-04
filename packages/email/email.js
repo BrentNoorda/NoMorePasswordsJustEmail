@@ -44,7 +44,13 @@ var getPool = function () {
       // XXX allow reconfiguration when the app config changes
       if (smtpPoolFuture.isResolved())
         return;
-      var url = config.url || process.env.MAIL_URL;
+
+      // NoMorePasswordsJustEmail FIX. This fix is based on instructions I found at
+      // http://stackoverflow.com/questions/20337309/meteor-deploy-mail-url-not-being-set
+      // NO NO NO, DO NOT LET config.url take precedence over process.env.MAIL_URL
+      //var url = config.url || process.env.MAIL_URL;
+      var url = process.env.MAIL_URL || config.url;
+
       var pool = null;
       if (url)
         pool = makePool(url);
