@@ -97,7 +97,7 @@ On the whole, the only fair statement is: It's as secure as a person's email is 
 ## The code
 
 None of the code here is particularly interesting. I put it together pretty quickly, and any
-other developer could do it at least as well. In NMPJE I'm more interested in testin the
+other developer could do it at least as well. In NMPJE I'm more interested in testing the
 user-flow than in the particular implementation.
 
 The part of NMPJE handling this user login, registration, and logout stuff is:
@@ -108,6 +108,11 @@ client-side html and handlebars/MeteorJS templates
 client-side MeteorJS template stuff
 * [server/user_account.js](https://github.com/BrentNoorda/NoMorePasswordsJustEmail/blob/master/server/user_account.js) -
 server-side code to manage accounts and sending emails
+
+There is one MeteorJS workaround here, so that when running on the live meteor.com website we won't hit
+the 200 emails/day limit (this also helps make our email less likely to end in the spam filters). That workaround
+is in [this commit code](https://github.com/BrentNoorda/NoMorePasswordsJustEmail/commit/381a994513ba71a0dc7c21d1019f439b382cf5ca),
+ and is based on [this stackoverflow question](http://stackoverflow.com/questions/20337309/meteor-deploy-mail-url-not-being-set).
 
 ------------------------------------------------------------------------------
 
