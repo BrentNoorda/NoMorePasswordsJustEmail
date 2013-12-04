@@ -16,7 +16,7 @@ Jump To:
 ------------------------------------------------------------------------------
 
 <a name="whats-so-bad"></a>
-# What's so bad about passwords?
+## What's so bad about passwords?
 
 Passwords suck. Good, strong passwords are difficult to think up,
 difficult to type,
@@ -29,7 +29,7 @@ just no denying it: passwords suck!
 ------------------------------------------------------------------------------
 
 <a name="example-flow"></a>
-# Example NMPJE login user flow
+## Example NMPJE login user flow
 
 On NMPJE your email address **is** your user id (adding separate account names would have just muddied
 the proof-of-concept).
@@ -67,7 +67,7 @@ wording changes so they're aware this is a new user account.
 ------------------------------------------------------------------------------
 
 <a name="awkward"></a>
-# Does this seem awkward?
+## Does this seem awkward?
 
 I don't know if this is more awkward than most sites, it probably depends on how much you hate passwords.
 
@@ -82,7 +82,7 @@ Again, it probably depends on how much you hate passwords.
 ------------------------------------------------------------------------------
 
 <a name="is-secure"></a>
-# Is this secure?
+## Is this secure?
 
 I wager that it's at least as secure as any site that allows one to reset passwords via email.
 
@@ -94,19 +94,25 @@ On the whole, the only fair statement is: It's as secure as a person's email is 
 ------------------------------------------------------------------------------
 
 <a name="code"></a>
-# The code
+## The code
 
-I wager that it's at least as secure as any site that allows one to reset passwords via email.
+None of the code here is particularly interesting. I put it together pretty quickly, and any
+other developer could do it at least as well. In NMPJE I'm more interested in testin the
+user-flow than in the particular implementation.
 
-Considering the difficulty in coming up with good passwords, and the increasing ease of hacking
-passwords, then is probably more secure than most situations.
+The part of NMPJE handling this user login, registration, and logout stuff is:
 
-On the whole, the only fair statement is: It's as secure as a person's email is secure.
+* [user_account.html](https://github.com/BrentNoorda/NoMorePasswordsJustEmail/blob/master/client/user_account/user_account.html) -
+client-side html and handlebars/MeteorJS templates
+* [client/user_account.js](https://github.com/BrentNoorda/NoMorePasswordsJustEmail/blob/master/client/user_account/user_account.js) -
+client-side MeteorJS template stuff
+* [server/user_account.js](https://github.com/BrentNoorda/NoMorePasswordsJustEmail/blob/master/server/user_account.js) -
+server-side code to manage accounts and sending emails
 
 ------------------------------------------------------------------------------
 
 <a name="links"></a>
-# Related links:
+## Related links:
 
 * Many discussions of the issue - [1](http://security.stackexchange.com/questions/12828/if-i-include-a-forgot-password-service-then-whats-the-point-of-using-a-passwor)
 [2](http://security.stackexchange.com/questions/4009/how-to-implement-non-password-authentication-in-a-web-site)
