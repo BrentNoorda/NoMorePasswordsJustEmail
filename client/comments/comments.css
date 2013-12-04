@@ -16,3 +16,9 @@
     padding: 0;
     line-height: 130%;
 }
+
+.comment-delete {
+    color: red;
+    font-size: 70%;
+    opacity: 0.3;
+}
