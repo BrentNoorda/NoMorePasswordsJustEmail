@@ -142,10 +142,6 @@ on all logins or if there has been a failed login, and c) keeping track of recen
 when an attack us underway. None of the above are difficult, and maybe future updates will include
 something like this.
 
-would have a code let's assume there are
-100,000 valid  (and a couple of restrictions I added, such
-as not starting with zero and never repeating adjacent digits) there are fewer than 100,000
-
 **denial-of-login?** - It is conceivable that a bunch of bots might simulate a user trying to log
 in from thousands of clients. In each case that would cause a new login code to be created for that
 legitimate user. If that legitimate user then is trying to log in from their own browser (assume they
