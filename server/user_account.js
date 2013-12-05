@@ -81,14 +81,14 @@ Meteor.methods({
             to: email,
             subject: "NoMorePasswordsJustEmail " + codeType + " security code",
             text: ( "Your NoMorePasswordsJustEmail " + codeType + " code is:\r\n\r\n      " + random_code + "\r\n\r\n" +
-                    "or use this link:\r\n\r\n      https://nomorepasswordsjustemail.com/#" + random_hash + "\r\n\r\n" +
-                    "note: this code is only valid for " + LOGIN_CODE_TIMEOUT_MINUTES + " minutes." ),
+                    "or use this link:\r\n\r\n      " + WEB_URL + "#" + random_hash + "\r\n\r\n" +
+                    "note: this single-use code is only valid for " + LOGIN_CODE_TIMEOUT_MINUTES + " minutes." ),
             html: ( "<html><body>" +
                     '<p>Your <b><i>NoMorePasswordsJustEmail</i></b> ' + codeType + ' code is:</p>' +
                     '<p style="margin-left:2em;"><font size="+1"><b>' + random_code + '</b></font></p>' +
                     '<p>or click on this link</p>' +
-                    '<p style="margin-left:2em;"><font size="-1"><a href="http://localhost:3000/#' + random_hash + '">https://nomorepasswordsjustemail.com/#' + random_hash + '</a></font></p>' +
-                    '<p><font size="-1">note: this code is only valid for ' + LOGIN_CODE_TIMEOUT_MINUTES + ' minutes.</font></p>' +
+                    '<p style="margin-left:2em;"><font size="-1"><a href="' + WEB_URL + '#' + random_hash + '">' + WEB_URL + '#' + random_hash + '</a></font></p>' +
+                    '<p><font size="-1">note: this single-use code is only valid for ' + LOGIN_CODE_TIMEOUT_MINUTES + ' minutes.</font></p>' +
                     '</body></html>' )
         });
 
