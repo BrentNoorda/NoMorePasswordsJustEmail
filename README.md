@@ -11,6 +11,8 @@ Jump To:
 * [Does this seem awkward?](#awkward)
 * [Is this secure?](#is-secure)
 * [The code](#code)
+* [Outstanding issues](#issues)
+* [History](#history)
 * [Related links](#links)
 
 ------------------------------------------------------------------------------
@@ -34,11 +36,11 @@ just no denying it: passwords suck!
 On NMPJE your email address **is** your user id (adding separate account names would have just muddied
 the proof-of-concept).
 
-When someone comes to [NoMorePasswordsJustEmail.meteor.com](https://nomorepasswordsjustemail.meteor.com/) and is not already logged in, they see this one-field dialog:
+When you come to [NoMorePasswordsJustEmail.meteor.com](https://nomorepasswordsjustemail.meteor.com/) and are not already logged in, you see this one-field dialog:
 
 ![](http://dl.dropboxusercontent.com/u/41075/NoMorePasswordsJustEmail/get_email.png)
 
-Entering their email address...
+Entering your email address...
 
 ![](http://dl.dropboxusercontent.com/u/41075/NoMorePasswordsJustEmail/enter_email.png)
 
@@ -46,7 +48,7 @@ Entering their email address...
 
 ![](http://dl.dropboxusercontent.com/u/41075/NoMorePasswordsJustEmail/get_code.png)
 
-That security code has been emailed to their email address. That email may look like this:
+That security code has been emailed to your email address. That email may look like this:
 
 ![](http://dl.dropboxusercontent.com/u/41075/NoMorePasswordsJustEmail/email.png)
 
@@ -58,7 +60,9 @@ Enter that security code into the web page...
 
 ![](http://dl.dropboxusercontent.com/u/41075/NoMorePasswordsJustEmail/logged_in.png)
 
-That user will stay logged in, even if they leave the browser and come back, until they press
+Alternatively, you can click on the link in that email and be logged in directly.
+
+You will stay logged in, even if you leave the browser and come back, until you press
 the logout button.
 
 The above flow is exactly the same for new users registering for the system, with only slight
@@ -113,6 +117,32 @@ There is one MeteorJS workaround here, so that when running on the live meteor.c
 the 200 emails/day limit (this also helps make our email less likely to end in the spam filters). That workaround
 is in [this commit code](https://github.com/BrentNoorda/NoMorePasswordsJustEmail/commit/381a994513ba71a0dc7c21d1019f439b382cf5ca),
  and is based on [this stackoverflow question](http://stackoverflow.com/questions/20337309/meteor-deploy-mail-url-not-being-set).
+
+------------------------------------------------------------------------------
+
+<a name="issues"></a>
+## Outstanding issues
+
+I'm so far convinced this is as safe as standard login systems, and more convenient a lot of
+the time, but there are still concerns
+
+**non-standard** - users are very very accustomed to standard email/password login forms. How to make
+this seem not so weird?
+
+**denial-of-login?** - It is conceivable that a bunch of bots might simulate a user trying to log
+in from thousands of clients. In each case that would cause a new login code to be created for that
+legitimate user. If that legitimate user then is trying to log in from their own browser (assume they
+aren't already logged in) may find that their security code is constantly being re-created faster than
+they can try to enter one. That legitimate user will also be receiving a whole lot of emails. This is
+a pretty weird scenario, and maybe it's not worth considering, but still I don't have a solution yet.
+
+------------------------------------------------------------------------------
+
+<a name="history"></a>
+## History:
+
+* v1.000 - 2013/05/03 - Initial release demonstrating login with just an emailed security key
+* v1.010 - 2013/05/04 - Add alternative security method of a link in the email
 
 ------------------------------------------------------------------------------
 

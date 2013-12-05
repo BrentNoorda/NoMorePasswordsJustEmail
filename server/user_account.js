@@ -80,11 +80,11 @@ Meteor.methods({
             from: "brent.noorda@gmail.com",
             to: email,
             subject: "NoMorePasswordsJustEmail " + codeType + " security code",
-            text: ( "Your NoMorePasswordsJustEmail " + codeType + " code is:\r\n\r\n      " + random_code + "\r\n\r\n" +
+            text: ( "Your NoMorePasswordsJustEmail " + codeType + " security code is:\r\n\r\n      " + random_code + "\r\n\r\n" +
                     "or use this link:\r\n\r\n      " + WEB_URL + "#" + random_hash + "\r\n\r\n" +
                     "note: this single-use code is only valid for " + LOGIN_CODE_TIMEOUT_MINUTES + " minutes." ),
             html: ( "<html><body>" +
-                    '<p>Your <b><i>NoMorePasswordsJustEmail</i></b> ' + codeType + ' code is:</p>' +
+                    '<p>Your <b><i>NoMorePasswordsJustEmail</i></b> ' + codeType + ' security code is:</p>' +
                     '<p style="margin-left:2em;"><font size="+1"><b>' + random_code + '</b></font></p>' +
                     '<p>or click on this link</p>' +
                     '<p style="margin-left:2em;"><font size="-1"><a href="' + WEB_URL + '#' + random_hash + '">' + WEB_URL + '#' + random_hash + '</a></font></p>' +
