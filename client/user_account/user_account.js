@@ -70,3 +70,19 @@ Template.loggedin.events({
         Session.set("email",null);
     }
 });
+
+Meteor.startup(function() {
+
+    // if the part after # looks like one of our login URL's, then try to use it
+    var hash = window.location.hash.slice(1);
+    if ( hash.length === SECURITY_CODE_HASH_LENGTH ) {
+        Meteor.call("login_via_url",hash.toUpperCase(),function(error,loginInfo){
+            if ( error ) {
+                // not much we can do with such an error
+            } else {
+                Meteor.loginWithPassword({email:loginInfo.email},loginInfo.pwd);
+            }
+        });
+    }
+
+});
