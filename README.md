@@ -129,6 +129,23 @@ the time, but there are still concerns
 **non-standard** - users are very very accustomed to standard email/password login forms. How to make
 this seem not so weird?
 
+**security-code too short?** - With a 6-digit number there would be a million possible random security
+codes. If someone knows you're on the system, enters your email address, then randomly picks a number they
+have a one in a million chance of guessing correctly. One in a million is pretty small, but it's
+not zero. It wouldn't do a robot any good to come in and just try all one-million numbers, because
+after the first wrong try NMPJE removes the code. But what if a robot was automated to enter the email
+address, try a code, enter an email address, try a code, repeatedly until it got lucky--if this robot
+could do so 1,000 times per second it would be expected to hack in in just a few minutes. NMPJE currently
+hasn't dealt with this problem yet. I assume the solution involves some combination of a) deciding how
+secure you need to be and selecting the security-code-length accordingly, b) adding some delay either
+on all logins or if there has been a failed login, and c) keeping track of recent events to detect
+when an attack us underway. None of the above are difficult, and maybe future updates will include
+something like this.
+
+would have a code let's assume there are
+100,000 valid  (and a couple of restrictions I added, such
+as not starting with zero and never repeating adjacent digits) there are fewer than 100,000
+
 **denial-of-login?** - It is conceivable that a bunch of bots might simulate a user trying to log
 in from thousands of clients. In each case that would cause a new login code to be created for that
 legitimate user. If that legitimate user then is trying to log in from their own browser (assume they
@@ -149,16 +166,17 @@ a pretty weird scenario, and maybe it's not worth considering, but still I don't
 <a name="links"></a>
 ## Related links:
 
-* Many discussions of the issue - [1](http://security.stackexchange.com/questions/12828/if-i-include-a-forgot-password-service-then-whats-the-point-of-using-a-passwor)
-[2](http://security.stackexchange.com/questions/4009/how-to-implement-non-password-authentication-in-a-web-site)
-[3](https://medium.com/p/d6509aa3c60b)
-[4](http://www.infoq.com/news/2011/07/BrowserID)
-[5](http://www.therealtomrose.com/kick-ass-website-login-flow-email-only-no-password/)
-[6a](http://notes.xoxco.com/post/27999787765/is-it-time-for-password-less-login)
-[6b](http://notes.xoxco.com/post/28288684632/more-on-password-less-login)
-[7](https://news.ycombinator.com/item?id=4308190)
-[8](https://github.com/relekang/django-nopassword)
-(_if I'd known so many people have already talked about this, I might not have bothered, so I'm glad I didn't know_)
+* [Discuss NMPJE on Hacker News](https://news.ycombinator.com/item?id=6847720)
+* Many discussions of the issue (_if I'd known so many people have already talked about this, I might not have bothered, so I'm glad I didn't know_)
+    - [If I include a Forgot Password service, then what's the point of using a password?](http://security.stackexchange.com/questions/12828/if-i-include-a-forgot-password-service-then-whats-the-point-of-using-a-passwor)
+    - [How to implement non-password authentication in a web site](http://security.stackexchange.com/questions/4009/how-to-implement-non-password-authentication-in-a-web-site)
+    - [Identify with email - No need for passwords](https://medium.com/p/d6509aa3c60b)
+    - [Is it time for password-less login?](http://notes.xoxco.com/post/27999787765/is-it-time-for-password-less-login)
+    - [More on password-less login](http://notes.xoxco.com/post/28288684632/more-on-password-less-login)
+    - [Mozilla Proposes to Sign-in Only with the Email Address, No User ID or Password Required](http://www.infoq.com/news/2011/07/BrowserID)
+    - [Kick-ass Website Login Flow (email only, no password)](http://www.therealtomrose.com/kick-ass-website-login-flow-email-only-no-password/)
+    - [Django-nopassword](http://relekang.github.io/django-nopassword/)
+    - [30 years of failure: the username/password combination](http://arstechnica.com/business/2009/10/30-years-of-failure-the-user-namepassword-combination/)
 * [Mozilla Persona](https://login.persona.org/) - Tool any site can use to login with just email (skipping the security code step) [video](https://www.youtube.com/watch?v=nJff23UdNAI)
 * [Handshake.js](http://sendgrid.com/blog/lets-deprecate-password-email-authentication/) - Similar recent POC to do away with passwords, as javascript and a service.
 * [NoPassword](http://nopassword.alexsmolen.com/) - Similar to NMPJE, as some Ruby code.
