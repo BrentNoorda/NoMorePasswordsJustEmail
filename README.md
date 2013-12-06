@@ -176,5 +176,6 @@ a pretty weird scenario, and maybe it's not worth considering, but still I don't
 * [Mozilla Persona](https://login.persona.org/) - Tool any site can use to login with just email (skipping the security code step) [video](https://www.youtube.com/watch?v=nJff23UdNAI)
 * [Handshake.js](http://sendgrid.com/blog/lets-deprecate-password-email-authentication/) - Similar recent POC to do away with passwords, as javascript and a service.
 * [NoPassword](http://nopassword.alexsmolen.com/) - Similar to NMPJE, as some Ruby code.
+* [A Guide to Using Passwords Without Distraction](http://www.filterjoe.com/2011/04/14/passwords-guide-without-distraction/) - A thorough guide for all of us still using sites that use passwords.
 * [NoMorePasswordsJustEmail.meteor.com](https://NoMorePasswordsJustEmail.meteor.com/) - this Proof of Concept
 * [Brent Noorda Brick Wall](http://www.brent-noorda.com/) - the author's homepage
