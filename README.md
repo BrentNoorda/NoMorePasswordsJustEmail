@@ -2,7 +2,7 @@ NoMorePasswordsJustEmail (NMPJE) - _because passwords suckity suck suck suck_
 ========================
 
 This is a proof-of-concept web site with no account passwords, using only email address for
-sign-up and log-in verification, as demonstrated at [NoMorePasswordsJustEmail.meteor.com](https://NoMorePasswordsJustEmail.meteor.com/)
+sign-up and log-in verification, as demonstrated at [NoMorePasswordsJustEmail.meteor.com](http://NoMorePasswordsJustEmail.meteor.com/)
 
 Jump To:
 
@@ -25,6 +25,8 @@ difficult to type,
 and difficult to remember--but all too easy to crack.
 When you forget your password (as we all do), there's the sucky "email me instructions to
 change my password" and then you have to go through that difficult password creation all over again.
+If you're on an insecure computer, with malware sniffing your client-side keystrokes or other data,
+then "all your password are belong to us."
 Multiply these difficulties by every service you use (you _better not_ be reusing passwords), and there's
 just no denying it: passwords suck!
 
@@ -36,7 +38,7 @@ just no denying it: passwords suck!
 On NMPJE your email address **is** your user id (adding separate account names would have just muddied
 the proof-of-concept).
 
-When you come to [NoMorePasswordsJustEmail.meteor.com](https://nomorepasswordsjustemail.meteor.com/) and are not already logged in, you see this one-field dialog:
+When you come to [NoMorePasswordsJustEmail.meteor.com](http://nomorepasswordsjustemail.meteor.com/) and are not already logged in, you see this one-field dialog:
 
 ![](http://dl.dropboxusercontent.com/u/41075/NoMorePasswordsJustEmail/get_email.png)
 
@@ -142,6 +144,14 @@ on all logins or if there has been a failed login, and c) keeping track of recen
 when an attack us underway. None of the above are difficult, and maybe future updates will include
 something like this.
 
+**force ssl?** - With v1.014 I turned off force-ssl so users can test this at http: or https: My reasoning
+is that since no passwords are going over the wire anyway, I don't need to worry so much. Still, there
+are some cookies representing session state, and it could be possible that someone may sniff that
+over the wire and spoof an existing session. This, to me, doesn't seem as dangerous as stolen
+passwords and so I let the NMPJE user decide whether they want to use http or https. If you're implementing
+a system similar to NMPJE you may want to consider just how secure you want to be, and may want to
+force https/SSL.
+
 **denial-of-login?** - It is conceivable that a bunch of bots might simulate a user trying to log
 in from thousands of clients. In each case that would cause a new login code to be created for that
 legitimate user. If that legitimate user then is trying to log in from their own browser (assume they
@@ -156,6 +166,7 @@ a pretty weird scenario, and maybe it's not worth considering, but still I don't
 
 * v1.000 - 2013/05/03 - Initial release demonstrating login with just an emailed security key
 * v1.010 - 2013/05/04 - Add alternative security method of a link in the email
+* v1.014 - 2013/05/07 - Allow and default to http, not just https. Let user choose. See "force ssl?" above.
 
 ------------------------------------------------------------------------------
 
@@ -177,5 +188,5 @@ a pretty weird scenario, and maybe it's not worth considering, but still I don't
 * [Handshake.js](http://sendgrid.com/blog/lets-deprecate-password-email-authentication/) - Similar recent POC to do away with passwords, as javascript and a service.
 * [NoPassword](http://nopassword.alexsmolen.com/) - Similar to NMPJE, as some Ruby code.
 * [A Guide to Using Passwords Without Distraction](http://www.filterjoe.com/2011/04/14/passwords-guide-without-distraction/) - A thorough guide for all of us still using sites that use passwords.
-* [NoMorePasswordsJustEmail.meteor.com](https://NoMorePasswordsJustEmail.meteor.com/) - this Proof of Concept
+* [NoMorePasswordsJustEmail.meteor.com](http://NoMorePasswordsJustEmail.meteor.com/) - this Proof of Concept
 * [Brent Noorda Brick Wall](http://www.brent-noorda.com/) - the author's homepage

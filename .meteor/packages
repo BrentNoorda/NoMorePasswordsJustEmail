@@ -6,7 +6,6 @@
 standard-app-packages
 preserve-inputs
 bootstrap
-force-ssl
 accounts-password
 jquery
 audit-argument-checks
