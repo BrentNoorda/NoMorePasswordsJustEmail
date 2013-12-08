@@ -31,6 +31,7 @@ Template.enter_email.events({
 
 Template.enter_email.rendered = function() {
     $('#enter-email').focus();
+    watch_for_login_hashcode();
 };
 
 Template.enter_security_code.events({
@@ -59,8 +60,45 @@ Template.enter_security_code.events({
     }
 });
 
+// as long as we're in the login state, keep an eye out for a hashcode which means we're logging
+// in - this is put here as a watcher, instead of just catching this on page reload, because on
+// the iphone if an email reloads a link, and nothing put the hashcode changes, the page isn't
+// going to really reload
+var old_login_hashcode = "";
+var hashcode_timeout = null;
+function watch_for_login_hashcode(one_time_only) {
+
+    function watcher() {
+        hashcode_timeout = null;
+        // if the part after # looks like one of our login URL's, then try to use it
+        var hash = window.location.hash.slice(1);
+        if ( hash !== old_login_hashcode ) {
+            old_login_hashcode = hash;
+
+            if ( hash.length === SECURITY_CODE_HASH_LENGTH ) {
+                Meteor.call("login_via_url",hash.toUpperCase(),function(error,loginInfo){
+                    if ( error ) {
+                        // not much we can do with such an error
+                    } else {
+                        Meteor.loginWithPassword({email:loginInfo.email},loginInfo.pwd);
+                    }
+                });
+            }
+        }
+        if ( !one_time_only ) {
+            hashcode_timeout = Meteor.setTimeout(watcher,333);
+        }
+    }
+
+    if ( hashcode_timeout !== null ) {
+        Meteor.clearTimeout(hashcode_timeout);
+    }
+    watcher();
+}
+
 Template.enter_security_code.rendered = function() {
     $('#enter-security-code').focus();
+    watch_for_login_hashcode();
 };
 
 Template.loggedin.email = function() {
@@ -74,18 +112,10 @@ Template.loggedin.events({
     }
 });
 
+Template.loggedin.rendered = function() {
+    watch_for_login_hashcode(true); // this will cause us to stop checking
+};
+
 Meteor.startup(function() {
-
-    // if the part after # looks like one of our login URL's, then try to use it
-    var hash = window.location.hash.slice(1);
-    if ( hash.length === SECURITY_CODE_HASH_LENGTH ) {
-        Meteor.call("login_via_url",hash.toUpperCase(),function(error,loginInfo){
-            if ( error ) {
-                // not much we can do with such an error
-            } else {
-                Meteor.loginWithPassword({email:loginInfo.email},loginInfo.pwd);
-            }
-        });
-    }
-
+    watch_for_login_hashcode(true); // in case there's a hashcode at startup
 });

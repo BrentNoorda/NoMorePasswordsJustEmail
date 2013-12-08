@@ -10,7 +10,7 @@
         <div class="comment-email">{{email}}</div>
         <div class="comment-text">
           {{text}}
-          {{#if my_address email}}
+          {{#if can_delete email}}
             <a href="#" onclick="delete_comment('{{_id}}')" class="comment-delete">X</a>
           {{/if}}
         </div>
