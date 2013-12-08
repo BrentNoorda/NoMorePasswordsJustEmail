@@ -13,7 +13,10 @@ Template.enter_email.events({
         if ( email.length === 0 ) {
             $('#enter-email').focus();
         } else {
-            Meteor.call("enter_email",email,function(error,result){
+            Meteor.call("enter_email",
+                email,
+                -1 != window.location.protocol.toLowerCase().indexOf('https'),
+                function(error,result){
                 if ( error ) {
                     alert("Error with that email address. Please try again.");
                     $('#enter-email').focus();

@@ -8,4 +8,5 @@ MAX_COMMENTS_SHOWN = 5000;
 
 SECURITY_CODE_HASH_LENGTH = 40;
 
-WEB_URL = "https://nomorepasswordsjustemail.meteor.com/"
+//MY_DOMAIN = "localhost:3000"
+MY_DOMAIN = "nomorepasswordsjustemail.meteor.com"

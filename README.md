@@ -2,7 +2,7 @@ NoMorePasswordsJustEmail (NMPJE) - _because passwords suckity suck suck suck_
 ========================
 
 This is a proof-of-concept web site with no account passwords, using only email address for
-sign-up and log-in verification, as demonstrated at [NoMorePasswordsJustEmail.meteor.com](https://NoMorePasswordsJustEmail.meteor.com/)
+sign-up and log-in verification, as demonstrated at [NoMorePasswordsJustEmail.meteor.com](http://NoMorePasswordsJustEmail.meteor.com/)
 
 Jump To:
 
@@ -25,6 +25,8 @@ difficult to type,
 and difficult to remember--but all too easy to crack.
 When you forget your password (as we all do), there's the sucky "email me instructions to
 change my password" and then you have to go through that difficult password creation all over again.
+If you're on an insecure computer, with malware sniffing your client-side keystrokes or other data,
+then "all your password are belong to us."
 Multiply these difficulties by every service you use (you _better not_ be reusing passwords), and there's
 just no denying it: passwords suck!
 
@@ -36,7 +38,7 @@ just no denying it: passwords suck!
 On NMPJE your email address **is** your user id (adding separate account names would have just muddied
 the proof-of-concept).
 
-When you come to [NoMorePasswordsJustEmail.meteor.com](https://nomorepasswordsjustemail.meteor.com/) and are not already logged in, you see this one-field dialog:
+When you come to [NoMorePasswordsJustEmail.meteor.com](http://nomorepasswordsjustemail.meteor.com/) and are not already logged in, you see this one-field dialog:
 
 ![](http://dl.dropboxusercontent.com/u/41075/NoMorePasswordsJustEmail/get_email.png)
 
@@ -129,6 +131,27 @@ the time, but there are still concerns
 **non-standard** - users are very very accustomed to standard email/password login forms. How to make
 this seem not so weird?
 
+**security-code too short?** - With a 6-digit number there would be a million possible random security
+codes. If someone knows you're on the system, enters your email address, then randomly picks a number they
+have a one in a million chance of guessing correctly. One in a million is pretty small, but it's
+not zero. It wouldn't do a robot any good to come in and just try all one-million numbers, because
+after the first wrong try NMPJE removes the code. But what if a robot was automated to enter the email
+address, try a code, enter an email address, try a code, repeatedly until it got lucky--if this robot
+could do so 1,000 times per second it would be expected to hack in in just a few minutes. NMPJE currently
+hasn't dealt with this problem yet. I assume the solution involves some combination of a) deciding how
+secure you need to be and selecting the security-code-length accordingly, b) adding some delay either
+on all logins or if there has been a failed login, and c) keeping track of recent events to detect
+when an attack us underway. None of the above are difficult, and maybe future updates will include
+something like this.
+
+**force ssl?** - With v1.014 I turned off force-ssl so users can test this at http: or https: My reasoning
+is that since no passwords are going over the wire anyway, I don't need to worry so much. Still, there
+are some cookies representing session state, and it could be possible that someone may sniff that
+over the wire and spoof an existing session. This, to me, doesn't seem as dangerous as stolen
+passwords and so I let the NMPJE user decide whether they want to use http or https. If you're implementing
+a system similar to NMPJE you may want to consider just how secure you want to be, and may want to
+force https/SSL.
+
 **denial-of-login?** - It is conceivable that a bunch of bots might simulate a user trying to log
 in from thousands of clients. In each case that would cause a new login code to be created for that
 legitimate user. If that legitimate user then is trying to log in from their own browser (assume they
@@ -143,24 +166,27 @@ a pretty weird scenario, and maybe it's not worth considering, but still I don't
 
 * v1.000 - 2013/05/03 - Initial release demonstrating login with just an emailed security key
 * v1.010 - 2013/05/04 - Add alternative security method of a link in the email
+* v1.014 - 2013/05/07 - Allow and default to http, not just https. Let user choose. See "force ssl?" above.
 
 ------------------------------------------------------------------------------
 
 <a name="links"></a>
 ## Related links:
 
-* Many discussions of the issue - [1](http://security.stackexchange.com/questions/12828/if-i-include-a-forgot-password-service-then-whats-the-point-of-using-a-passwor)
-[2](http://security.stackexchange.com/questions/4009/how-to-implement-non-password-authentication-in-a-web-site)
-[3](https://medium.com/p/d6509aa3c60b)
-[4](http://www.infoq.com/news/2011/07/BrowserID)
-[5](http://www.therealtomrose.com/kick-ass-website-login-flow-email-only-no-password/)
-[6a](http://notes.xoxco.com/post/27999787765/is-it-time-for-password-less-login)
-[6b](http://notes.xoxco.com/post/28288684632/more-on-password-less-login)
-[7](https://news.ycombinator.com/item?id=4308190)
-[8](https://github.com/relekang/django-nopassword)
-(_if I'd known so many people have already talked about this, I might not have bothered, so I'm glad I didn't know_)
+* [Discuss NMPJE on Hacker News](https://news.ycombinator.com/item?id=6847720)
+* Many discussions of the issue (_if I'd known so many people have already talked about this, I might not have bothered, so I'm glad I didn't know_)
+    - [If I include a Forgot Password service, then what's the point of using a password?](http://security.stackexchange.com/questions/12828/if-i-include-a-forgot-password-service-then-whats-the-point-of-using-a-passwor)
+    - [How to implement non-password authentication in a web site](http://security.stackexchange.com/questions/4009/how-to-implement-non-password-authentication-in-a-web-site)
+    - [Identify with email - No need for passwords](https://medium.com/p/d6509aa3c60b)
+    - [Is it time for password-less login?](http://notes.xoxco.com/post/27999787765/is-it-time-for-password-less-login)
+    - [More on password-less login](http://notes.xoxco.com/post/28288684632/more-on-password-less-login)
+    - [Mozilla Proposes to Sign-in Only with the Email Address, No User ID or Password Required](http://www.infoq.com/news/2011/07/BrowserID)
+    - [Kick-ass Website Login Flow (email only, no password)](http://www.therealtomrose.com/kick-ass-website-login-flow-email-only-no-password/)
+    - [Django-nopassword](http://relekang.github.io/django-nopassword/)
+    - [30 years of failure: the username/password combination](http://arstechnica.com/business/2009/10/30-years-of-failure-the-user-namepassword-combination/)
 * [Mozilla Persona](https://login.persona.org/) - Tool any site can use to login with just email (skipping the security code step) [video](https://www.youtube.com/watch?v=nJff23UdNAI)
 * [Handshake.js](http://sendgrid.com/blog/lets-deprecate-password-email-authentication/) - Similar recent POC to do away with passwords, as javascript and a service.
 * [NoPassword](http://nopassword.alexsmolen.com/) - Similar to NMPJE, as some Ruby code.
-* [NoMorePasswordsJustEmail.meteor.com](https://NoMorePasswordsJustEmail.meteor.com/) - this Proof of Concept
+* [A Guide to Using Passwords Without Distraction](http://www.filterjoe.com/2011/04/14/passwords-guide-without-distraction/) - A thorough guide for all of us still using sites that use passwords.
+* [NoMorePasswordsJustEmail.meteor.com](http://NoMorePasswordsJustEmail.meteor.com/) - this Proof of Concept
 * [Brent Noorda Brick Wall](http://www.brent-noorda.com/) - the author's homepage
