@@ -10,5 +10,5 @@ SECURITY_CODE_HASH_LENGTH = 40;
 
 ADMIN_ACCOUNT_ID = "brent.noorda@gmail.com" // admin sends emails and can delete any comments
 
-//MY_DOMAIN = "10.0.0.200:3000"
+//MY_DOMAIN = "localhost:3000"
 MY_DOMAIN = "nomorepasswordsjustemail.meteor.com"
