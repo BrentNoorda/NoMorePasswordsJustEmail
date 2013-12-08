@@ -28,7 +28,14 @@ Meteor.methods({
 
     delete_comment: function(id) {
         check(id,String);
-        comments.remove({ _id:id, email:Meteor.user().emails[0].address });
+        var current_user_id = Meteor.user().emails[0].address;
+        if ( current_user_id === ADMIN_ACCOUNT_ID ) {
+            // administrator is allowed to delete anyone's comments
+            comments.remove({ _id:id });
+        } else {
+            // this will fail if logged-in user is not the one who made this comment
+            comments.remove({ _id:id, email:current_user_id });
+        }
     }
 
 });
