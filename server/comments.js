@@ -23,6 +23,20 @@ Meteor.methods({
         });
 
         comments.insert({text:comment,email:email,when:when});
+
+        // send myself an email soon so I know there's a new comment
+        Meteor.setTimeout(function(){
+            Email.send({
+                from: ADMIN_ACCOUNT_ID,
+                to: ADMIN_ACCOUNT_ID,
+                subject: "New Comment on NoMorePasswordsJustEmail",
+                text: ( "New comment at http://nomorepasswordsjustemail.meteor.com/" ),
+                html: ( "<html><body>" +
+                        '<p>New Comment at <a href="http://nomorepasswordsjustemail.meteor.com/">http://nomorepasswordsjustemail.meteor.com/</a></p>' +
+                        '</body></html>' )
+            });
+        },5000);
+
         return 0;
     },
 
