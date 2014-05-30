@@ -184,6 +184,8 @@ a pretty weird scenario, and maybe it's not worth considering, but still I don't
     - [Kick-ass Website Login Flow (email only, no password)](http://www.therealtomrose.com/kick-ass-website-login-flow-email-only-no-password/)
     - [Django-nopassword](http://relekang.github.io/django-nopassword/)
     - [30 years of failure: the username/password combination](http://arstechnica.com/business/2009/10/30-years-of-failure-the-user-namepassword-combination/)
+    - [Passwords are Obsolete](https://medium.com/cyber-security/passwords-are-obsolete-9ed56d483eb)
+* [Shop It To Me says "Bye Bye Passwords"](http://blog.shopittome.com/2014/05/29/bye-bye-passwords/) - An app that dropped passwords in favor of email
 * [Mozilla Persona](https://login.persona.org/) - Tool any site can use to login with just email (skipping the security code step) [video](https://www.youtube.com/watch?v=nJff23UdNAI)
 * [Handshake.js](http://sendgrid.com/blog/lets-deprecate-password-email-authentication/) - Similar recent POC to do away with passwords, as javascript and a service.
 * [NoPassword](http://nopassword.alexsmolen.com/) - Similar to NMPJE, as some Ruby code.
