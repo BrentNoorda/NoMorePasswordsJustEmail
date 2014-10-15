@@ -185,7 +185,7 @@ a pretty weird scenario, and maybe it's not worth considering, but still I don't
     - [Django-nopassword](http://relekang.github.io/django-nopassword/)
     - [30 years of failure: the username/password combination](http://arstechnica.com/business/2009/10/30-years-of-failure-the-user-namepassword-combination/)
     - [Passwords are Obsolete](https://medium.com/cyber-security/passwords-are-obsolete-9ed56d483eb)
-* [Passwordless](https://passwordless.net/) - a similar passwords-suck token-based authentication middleware for Express & Node.js
+* [Passwordless](https://passwordless.net/) - a similar passwords-suck token-based authentication middleware for Express & Node.js (good description [here](https://hacks.mozilla.org/2014/10/passwordless-authentication-secure-simple-and-fast-to-deploy/))
 * [Shop It To Me says "Bye Bye Passwords"](http://blog.shopittome.com/2014/05/29/bye-bye-passwords/) - An app that dropped passwords in favor of email
 * [Mozilla Persona](https://login.persona.org/) - Tool any site can use to login with just email (skipping the security code step) [video](https://www.youtube.com/watch?v=nJff23UdNAI)
 * [Handshake.js](http://sendgrid.com/blog/lets-deprecate-password-email-authentication/) - Similar recent POC to do away with passwords, as javascript and a service.
